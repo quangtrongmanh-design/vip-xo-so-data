@@ -1,2 +1,23 @@
-- name: Run fetch script
-  run: echo "Mock fetch success"
+name: Update lottery data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '50 11 * * *'
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run fetch script
+        run: echo "Mock fetch success"
